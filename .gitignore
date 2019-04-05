@@ -1,0 +1,15 @@
+*.log
+.idea
+coverage/
+dist/
+build/
+*.vimrc
+.DS_STORE
+.env
+node_modules/
+bower_components/
+.nyc_output/
+.vscode/
+package-lock.json
+.DS_STORE
+.DS_Store

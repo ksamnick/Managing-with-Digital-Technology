@@ -1,0 +1,12 @@
+{
+  "name": "Managing_With_Digital_Technology",
+  "version": "0.0.0",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {
+    "s3-upload": "0.1.0"
+  },
+  "main": "index.html",
+  "repository": "https://github.com/jakubkrajcovic/Managing-with-Digital-Technology",
+  "author": "Jacub"
+}
