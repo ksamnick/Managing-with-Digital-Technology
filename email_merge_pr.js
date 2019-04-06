@@ -16,4 +16,3 @@ request(options, function (error, response, body) {
         process.env.COMMITER_EMAIL = info[0].commit.author.email;
     }
 });
-console.log("1");
