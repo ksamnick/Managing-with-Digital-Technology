@@ -14,5 +14,7 @@ request(options, function (error, response, body) {
     if (!error && response.statusCode == 200) {
         const info = JSON.parse(body);
         process.env.COMMITER_EMAIL = info[0].commit.author.email;
+        console.log("process.env.COMMITER_EMAIL");
+        console.log(process.env.COMMITER_EMAIL)
     }
 });
