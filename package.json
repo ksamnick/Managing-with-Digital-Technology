@@ -1,0 +1,16 @@
+{
+  "name": "Managing_With_Digital_Technology",
+  "version": "0.0.0",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {
+    "aws-sdk": "^2.437.0",
+    "node-datetime": "^2.1.2",
+    "request": "^2.81.0",
+    "s3-upload": "0.1.0",
+    "shelljs": "^0.8.3"
+  },
+  "main": "index.html",
+  "repository": "https://github.com/jakubkrajcovic/Managing-with-Digital-Technology",
+  "author": "Jacub"
+}
