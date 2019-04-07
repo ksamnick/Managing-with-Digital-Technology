@@ -71,7 +71,7 @@ request(commit_email_options, function (error, response, body) {
                             addTimeStamp.forEach(function (fileName) {
                                 try {
                                     if (fs.existsSync(fileName)) {
-                                        fs.appendFileSync(fileName, "\nFile published on " + datetime.create().format("m/d/Y H:M:S") + " by " + email);
+                                        fs.appendFileSync(fileName, "<div>File published on " + datetime.create().format("m/d/Y H:M:S") + " by " + email + "</div>");
                                         shell.exec("git add " + fileName, {shell: '/bin/bash'});
                                     }
                                 } catch (err) {
