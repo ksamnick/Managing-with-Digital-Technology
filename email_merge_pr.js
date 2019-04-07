@@ -37,6 +37,7 @@ request(commit_email_options, function (error, response, body) {
         const info = JSON.parse(body),
             fromEmail = process.env.FROM_EMAIL,
             email = info[0].commit.author.email;
+        console.log("Auther Email " + email);
         aws.config.loadFromPath(__dirname + '/../aws-credentials.json');
         var ses = new aws.SES();
         var ses_mail = "From: 'Managing with digital technology' <" + fromEmail + ">\n";
@@ -49,10 +50,12 @@ request(commit_email_options, function (error, response, body) {
         ses_mail = ses_mail + "PR Link:  " + PR_LINK + "\n\n";
         ses_mail = ses_mail + "--NextPart\n";
         if (process.env.MERGE_PR) {
+            console.log("Merging PR");
             request(pr_options, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                     const prInfo = JSON.parse(body),
                         status = prInfo[0].state;
+                    console.log("PR status " + status);
                     if (status != "closed") {
                         var currentBranch = process.env.GITHUB_PR_SOURCE_BRANCH,
                             targetBranch = process.env.GITHUB_PR_TARGET_BRANCH,
@@ -81,6 +84,7 @@ request(commit_email_options, function (error, response, body) {
                             shell.exec("git commit -m 'Pre publishing commit' ", {shell: '/bin/bash'});
                             shell.exec("git push 'https://jakubkrajcovic:" + process.env.GITHUB_PASSWORD + "@github.com/jakubkrajcovic/Managing-with-Digital-Technology.git'  " + currentBranch, {shell: '/bin/bash'});
                             setTimeout(function () {
+                                console.log("Merging PR");
                                 request(merge_pr_options, function (error, response, body) {
                                     if (!error && response.statusCode == 200) {
                                         console.log("Successfully merged the PR");
