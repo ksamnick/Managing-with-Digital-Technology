@@ -165,17 +165,22 @@ request(commit_email_options, function (error, response, body) {
                                 });
                             }
                         } else {
-                            ses_mail = getEmailContent(fromEmail, email, true);
-                            ses_mail = ses_mail + "PR errors:  \n\n";
-                            if (addTimeStamp.length != changed_files.length) {
-                                ses_mail = ses_mail + "Files outside mbax9154 folder have been edited or files dont have an html extension \n\n";
+                            if (addTimeStamp.length == 0 && changed_files.length == 0) {
+                                console.log("No changes detected between base branch and feature branch");
+                                process.exit(1);
+                            } else {
+                                ses_mail = getEmailContent(fromEmail, email, true);
+                                ses_mail = ses_mail + "PR errors:  \n\n";
+                                if (addTimeStamp.length != changed_files.length) {
+                                    ses_mail = ses_mail + "Files outside mbax9154 folder have been edited or files dont have an html extension \n\n";
+                                }
+                                if (addTimeStamp.length != 1) {
+                                    ses_mail = ses_mail + "More than one file have been edited  \n\n";
+                                }
+                                ses_mail = ses_mail + "--NextPart\n";
+                                forceExit = true;
+                                sendEmail(ses, ses_mail, email, fromEmail);
                             }
-                            if (addTimeStamp.length != 1) {
-                                ses_mail = ses_mail + "More than one file have been edited  \n\n";
-                            }
-                            ses_mail = ses_mail + "--NextPart\n";
-                            forceExit = true;
-                            sendEmail(ses, ses_mail, email, fromEmail);
                         }
                     } else {
                         ses_mail = getEmailContent(fromEmail, email, true);
