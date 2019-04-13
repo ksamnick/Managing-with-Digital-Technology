@@ -188,10 +188,19 @@ request(commit_email_options, function (error, response, body) {
                     console.log("PR status is not open");
                     process.exit(1);
                 }
+            } else {
+                console.log("Failed to fetch PR");
+                console.log(error);
+                console.log(response);
+                console.log(body);
+                process.exit(1);
             }
         });
     } else {
+        console.log("Failed to fetch commits");
         console.log(error);
+        console.log(response);
+        console.log(body);
         process.exit(1);
     }
 });
