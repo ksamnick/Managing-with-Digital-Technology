@@ -100,9 +100,15 @@ request(commit_email_options, function (error, response, body) {
                         shell.exec("git pull 'https://jakubkrajcovic:" + process.env.GITHUB_PASSWORD + "@github.com/jakubkrajcovic/Managing-with-Digital-Technology.git' master", {shell: '/bin/bash'});
                         shell.exec("git checkout " + currentBranch, {shell: '/bin/bash'});
                         shell.exec("git pull 'https://jakubkrajcovic:" + process.env.GITHUB_PASSWORD + "@github.com/jakubkrajcovic/Managing-with-Digital-Technology.git'  " + currentBranch, {shell: '/bin/bash'});
-                        var changed_files = shell.exec("git diff " + currentBranch + "..master --name-only", {shell: '/bin/bash'}).stdout.split(/\r?\n|\r/g);
+                        var changed_files_extra = shell.exec("git diff " + currentBranch + "..master --name-only", {shell: '/bin/bash'}).stdout.split(/\r?\n|\r/g);
                         console.log("Changed Files");
-                        console.log(changed_files);
+                        console.log(changed_files_extra);
+                        var changed_files = [];
+                        changed_files_extra.forEach(function (fileName) {
+                            if (fileName) {
+                                changed_files.push(fileName)
+                            }
+                        });
                         changed_files.forEach(function (value) {
                             if (value && value.indexOf("mbax9154") != -1 && value.indexOf("html") != -1) {
                                 addTimeStamp.push(value)
